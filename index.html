@@ -1,99 +1,61 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>final project shecodes</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        li {
-            list-style: none;
-            text-align: left;
-            margin-left: 15px;
-        }
-
-        .style-page {
-            padding: 400px auto;
-            text-align: center;
-            display: block;
-            margin: 0 auto;
-            border: 1px;
-            background: yellowgreen;
-            max-width: 600px;
-        }
-
-        .weather-forcast {
-            margin-top: 20px;
-        }
-
-        .weather-forcast-date {
-            opacity: 0.5;
-        }
-
-        .weather-forcast-minimum {
-            opacity: 0.5;
-        }
-    </style>
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <title>Weather App</title>
 </head>
 
 <body>
-    <div class="style-page">
-        <div class="container">
-            <form id="city-holder">
-                <input type="text" placeholder="enter the city" id="weather-api" />
-                <input type="submit" value="submit" />
-            </form>
-            <ul>
-                <li>
+    <div class="container">
+        <div class="weather-app-wrapper">
+            <div class="weather-app">
+                <form id="search-form" class="mb-3">
                     <div class="row">
-                        <div class="col-2">
-                            <div id="place">patna</div>
+                        <div class="col-9">
+                            <input type="search" placeholder="Type a city.." class="form-control" id="city-input"
+                                autocomplete="off" />
                         </div>
-                </li>
-                <li>
-                    <div class="row">
-                        <div class="col-2">
-                            <div id="updated">last-updated:5:00</div>
-                        </div>
-                </li>
-                <li>
-                    <div class="row">
-                        <div class="col-2">
-                            <div id="discription">haze</div>
-                        </div>
-                </li>
-            </ul>
-            <div class="row">
-                <div class="col-6">
-                    <div class="clearfix weather-temperature">
-                        <img src="http://openweathermap.org/img/wn/50n@2x.png" alt="haze" id="icon" class="float-left">
-                        <div class="float-left">
-                            <strong id="temperature">35</strong><span class="units"><a href="#" id="celsius-link"
-                                    class="active">°C</a> | <a href="#" id="fahrenheit-link">°F</a></span>
+                        <div class="col-3">
+                            <input type="submit" value="Search" class="btn btn-primary w-100" />
                         </div>
                     </div>
-                </div>
-                <div class="col-6">
+                </form>
+                <div class="overview">
+                    <h1 id="city"></h1>
                     <ul>
-                        <li>Humidity: <span id="humidity">63</span>%</li>
-                        <li>Wind: <span id="wind">15</span> km/h</li>
+                        <li>Last updated: <span id="date"></span></li>
+                        <li id="description"></li>
                     </ul>
                 </div>
-            </div>
-            <div class="weather-forcast">
                 <div class="row">
-                    <div class="col-2">
-                        <div class="weather-forcast-date">Thu</div> <img
-                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAepJREFUaN7tmd2thCAQhSnBEijBEmjgJpZgCZZgCZZgCXZwLcFX3yiBDlhIhhvC5dcdFzeB5LzsTtjz4cwwZomUknyzSANoAA2gATQANICSdZ4nA/Wk0ioGUGY7pVVJKElLXGl6NIAySMGojGh9MsCRMG80Pw5AmRozzRvppzVoGNCk068mwFYI4JPArpMSgB0BwGj5doAVutnsdDNdYwwVAH5o8rTNqzoyGsKIAqAvKETjRkNGQxC5BR8EuMm8vJCO0cKPAXBs83DyXcF9YmvKBoDHfIf5/o2DESUAM7L5HU6eez4fraFwzEwvYQo9BLDfcPrM2dek02jd1vZnOfuyEMCKaH52OwqMGaF04vBdDsQaApgQT546Jy9g/1gtcHgSqUxYQgD0xrwvgR9gn5D6WBtdEC6s6e55KQbQWd3hijqECVakxoq33okzXj03pFpiNQCOT4zfSYCf35MprUpHaBMrhltzlKwOoAx1SkJJgnqPeR3DrRhmXYZY6q8CLJaxP3NOzOzEjOSDKwigT9sxtnvM01RMTYDdMUc9AG5M/wgAnQaOsdljfnBiFlJh/QPwFK4u0C5RuMKNqQngFu7wtMJNAYhUUebE1ATYYoULAFvNwk0BmFuVZty8lFRe7S+mBtAAGkADeFsvKpKWeAy6FowAAAAASUVORK5CYII="
-                            width="42" />
-                        <div class="temperature"><span class="weather-forcast-maximum">18</span><span
-                                class="weather-forcast-minimum"> 12</span></div>
+                    <div class="col-6">
+                        <div class="clearfix weather-temperature">
+                            <img src="" alt="Clear" id="icon" class="float-left" />
+                            <div class="float-left">
+                                <strong id="temperature"></strong><span class="units"> °C</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <ul>
+                            <li>Humidity: <span id="humidity"></span>%</li>
+                            <li>Wind: <span id="wind"></span> km/h</li>
+                        </ul>
                     </div>
                 </div>
+                <div class="weather-forecast" id="forecast"></div>
             </div>
+            <small>
+                <a href="https://github.com/wecodeschool/vanilla-weather-app" target="_blank">Open-source code</a> by
+                Rupali Bharti </small>
         </div>
-    </div>
-    </div>
     </div>
     <script src="index.js"></script>
 </body>
